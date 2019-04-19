@@ -18,3 +18,23 @@ exports.getProducts=(done)=>{
         }
     })
 };
+
+exports.deleteById=(id,done)=>{
+    Product.findOne({where:{id:id}}).then((getdata)=>{
+        if(getdata){
+            Product.destroy({where:{id:id}}).then((data)=>{
+                done(null,data)
+            }).catch((err)=>{
+                console.log(err)
+            })
+        }
+    })
+};
+
+exports.updateById=(id,body,done)=>{
+    Product.update(body,{where:{id:id}}).then((updatedata)=>{
+        done(null,updatedata)
+    }).catch((err)=>{
+        console.log(err)
+    })
+};

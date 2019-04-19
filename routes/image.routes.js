@@ -2,7 +2,7 @@ const {Router} = require('express');
 const router= Router();
 const multer=require('multer');
 const path=require('path');
-const {post,getProducts}= require('../controller/image.controller');
+const {post,getProducts,deleteById,updateById}= require('../controller/image.controller');
 
 //Store image in specific folder
 
@@ -52,7 +52,7 @@ router.post('/',upload.single('image'), (req,res,next)=>{
 //         }
 //     })
 // });
-router.get('/',(req,res)=>{
+router.get('/getproducts',(req,res)=>{
     getProducts((err,result)=>{
         if(err){
             res.json(err)
@@ -61,6 +61,36 @@ router.get('/',(req,res)=>{
         }else{
             res.json(result);
             console.log("result is",result)
+        }
+    })
+});
+
+router.delete('/:id',(req,res)=>{
+const id=req.params.id;
+    deleteById(id,(err,result)=>{
+        if(err){
+            res.json(err)
+            res.statusCode = 404;
+            console.log(err)
+        }else{
+            res.json(result)
+            res.statusCode = 200;
+            debugger;
+            console.log("result is" ,result)
+        }
+    })
+});
+
+router.put('/:id',upload.single('image'),(req,res)=>{
+    req.body.image= req.file.filename;
+    updateById(req.params.id,req.body,(err,result) => {
+        if(err){
+            res.statusCode=400;
+            res.json(err);
+        }
+        else{
+            res.statusCode=200;
+            res.json(result);
         }
     })
 });

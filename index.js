@@ -1,19 +1,20 @@
 var express = require('express');
 const bodyparser=require('body-parser');
 debugger;
-const {db}=require('./config/database')
+const {db}=require('./config/database');
 var app = express();
-
+var cors=require('cors');
 //var productRoute = require('./routes/product.routes');
 const userRoute = require('./routes/user.routes');
 const imageRoute=require('./routes/image.routes');
 debugger;
  app.get('/',(req,res)=>{
      res.end("hello start property backend")
- })
+ });
 debugger;
 app.use(bodyparser.json());
-app.use(bodyparser.urlencoded({extended:false}))
+app.use(bodyparser.urlencoded({limit:'50mb',extended:true}));
+app.use(cors())
 if (db){
     console.log("sucess")
 } else {
