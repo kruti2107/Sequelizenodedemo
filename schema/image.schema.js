@@ -19,4 +19,12 @@ const Product =  db.define('products',{
         type:Sequelize.DOUBLE,
         allowNull:false
     }
-})
+});
+Product.sync({force:false}).then(()=>{
+    debugger;
+    console.log("sucess");
+}).catch((err)=>{
+    console.log(err)
+});
+
+module.exports = Product;

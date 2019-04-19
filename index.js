@@ -5,7 +5,8 @@ const {db}=require('./config/database')
 var app = express();
 
 //var productRoute = require('./routes/product.routes');
-var userRoute = require('./routes/user.routes');
+const userRoute = require('./routes/user.routes');
+const imageRoute=require('./routes/image.routes');
 debugger;
  app.get('/',(req,res)=>{
      res.end("hello start property backend")
@@ -21,7 +22,7 @@ if (db){
 debugger;
 //app.use('/product',productRoute);
 app.use('/user',userRoute);
-
+app.use('/product',imageRoute);
 
 app.listen(3001, (err) => {
     if (err) {
