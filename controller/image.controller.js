@@ -11,3 +11,10 @@ exports.post=(body,done)=>{
     })
 };
 
+exports.getProducts=(done)=>{
+    Product.findAll({}).then((userData)=>{
+        if(userData){
+            done(null,userData)
+        }
+    })
+};

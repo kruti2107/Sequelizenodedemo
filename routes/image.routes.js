@@ -2,7 +2,7 @@ const {Router} = require('express');
 const router= Router();
 const multer=require('multer');
 const path=require('path');
-const {post}= require('../controller/image.controller');
+const {post,getProducts}= require('../controller/image.controller');
 
 //Store image in specific folder
 
@@ -52,4 +52,16 @@ router.post('/',upload.single('image'), (req,res,next)=>{
 //         }
 //     })
 // });
+router.get('/',(req,res)=>{
+    getProducts((err,result)=>{
+        if(err){
+            res.json(err)
+            res.statusCode = 404;
+            console.log(err)
+        }else{
+            res.json(result);
+            console.log("result is",result)
+        }
+    })
+});
 module.exports=router;

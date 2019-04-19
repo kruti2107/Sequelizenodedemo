@@ -12,9 +12,9 @@ exports.post=(body,done)=>{
 };
 
 exports.get=(done)=>{
-    user.findAll({}).then((userData)=>{
-        if(userData){
-            done(null,userData)
+    user.findAll({}).then((productData)=>{
+        if(productData){
+            done(null,productData)
         }
     })
 };
